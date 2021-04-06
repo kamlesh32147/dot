@@ -1,16 +1,14 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
-WORKDIR /app
+FROM centos
+RUN dnf install git -y
+RUN dnf install dotnet-sdk-5.0 -y
+RUN git clone https://github.com/kamlesh32147/dot.git
+Workdir dot
+CMD  dotnet restore
+CMD dotnet run
+EXPOSE 80
 
-COPY *.csproj ./
-RUN dotnet restore
-COPY . ./
-RUN dotnet publish -c Release -o out
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "aspnetcoreapp.dll"]
-#COPY bin/Release/net5.0/publish/ App/
-#WORKDIR /App
-#RUN dotnet run
-#EXPOSE 5001
-#EXPOSE  5000
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                      
